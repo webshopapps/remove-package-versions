@@ -60,7 +60,7 @@ function isSemanticVersion(string $version) : bool {
 }
 
 $token             = env('GITHUB_TOKEN');
-$keepNumVersions   = (int) env('INPUT_KEEP_VERSIONS') ?: 5;
+$keepNumVersions   = 0;
 $keepLatest        = 'true' === env('INPUT_KEEP_LATEST');
 $removeSemver      = 'true' === env('INPUT_REMOVE_SEMVER');
 $repoNameWithOwner = env('GITHUB_REPOSITORY');
