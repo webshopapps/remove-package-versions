@@ -163,7 +163,7 @@ foreach ($packageNodes as $packageNode) {
         continue;
     }
 
-    for ($i = $keepVersions; $i < $numVersions; $i++) {
+    for ($i = $keepNumVersions; $i < $numVersions; $i++) {
         $packageVersionId       = $versionNodes[$i]['id'];
         $packageVersion         = $versionNodes[$i]['version'];
         $packageNameWithVersion = sprintf('%s:%s', $packageName, $packageVersion);
