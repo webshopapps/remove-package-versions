@@ -142,11 +142,11 @@ if (empty($packageNodes)) {
 $removedPackages = [];
 
 // List of versions to always keep
-$keepVersions = [
-    // Removing this specific version of a Docker package triggers a bug in GitHub
-    // Packages. Keep this safeguard until the bug has been resolved.
-    'docker-base-layer'
-];
+// $keepVersions = [
+//     // Removing this specific version of a Docker package triggers a bug in GitHub
+//     // Packages. Keep this safeguard until the bug has been resolved.
+//     'docker-base-layer'
+// ];
 
 if ($keepLatest) {
     $keepVersions[] = 'latest';
