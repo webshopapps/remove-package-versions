@@ -60,7 +60,7 @@ function isSemanticVersion(string $version) : bool {
 }
 
 $token             = env('GITHUB_TOKEN');
-$keepVersions      = (int) env('INPUT_KEEP_VERSIONS') ?: 5;
+$keepNumVersions   = (int) env('INPUT_KEEP_VERSIONS') ?: 5;
 $keepLatest        = 'true' === env('INPUT_KEEP_LATEST');
 $removeSemver      = 'true' === env('INPUT_REMOVE_SEMVER');
 $repoNameWithOwner = env('GITHUB_REPOSITORY');
@@ -142,11 +142,11 @@ if (empty($packageNodes)) {
 $removedPackages = [];
 
 // List of versions to always keep
-// $keepVersions = [
-//     // Removing this specific version of a Docker package triggers a bug in GitHub
-//     // Packages. Keep this safeguard until the bug has been resolved.
-//     'docker-base-layer'
-// ];
+$keepVersions = [
+    // Removing this specific version of a Docker package triggers a bug in GitHub
+    // Packages. Keep this safeguard until the bug has been resolved.
+    'docker-base-layer'
+];
 
 if ($keepLatest) {
     $keepVersions[] = 'latest';
@@ -158,8 +158,8 @@ foreach ($packageNodes as $packageNode) {
     $versionNodes = $packageNode['versions']['nodes'];
     $numVersions = min($versionsLimit, $packageNode['versions']['totalCount']);
 
-    if ($numVersions <= $keepVersions) {
-        debug(sprintf('[%s] [%s] Package has fewer than %d versions, no need for removal', $repoNameWithOwner, $packageName, $keepVersions));
+    if ($numVersions <= $keepNumVersions) {
+        debug(sprintf('[%s] [%s] Package has fewer than %d versions, no need for removal', $repoNameWithOwner, $packageName, $keepNumVersions));
         continue;
     }
 
